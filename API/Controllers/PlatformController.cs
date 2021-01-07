@@ -22,7 +22,7 @@ namespace API.Controllers
         [HttpGet("GetAllPlatform")]
         public async Task<IActionResult> GetAllPlatforms()
         {
-            var platforms = await _unitOfWork.Repository<OrderPlatform>().ListAllAsync();
+            var platforms = await _unitOfWork.Platform.ListAllAsync();
             return Ok(new NerdyResponse { Result = platforms });
         }
 

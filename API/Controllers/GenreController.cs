@@ -25,21 +25,21 @@ namespace API.Controllers
         [HttpGet("")]
         public async Task<IActionResult> GetAllGenre()
         {
-            var genres = await _unitOfWork.Repository<Genre>().ListAllAsync();
+            var genres = await _unitOfWork.Genre.ListAllAsync();
             return Ok(new NerdyResponse { Result = genres });
         }
 
         [HttpGet("{id}", Name ="GenreDetails")]
         public async Task<IActionResult> GetGenre(string id)
         {
-            var genre = await _unitOfWork.Repository<Genre>().GetByIdAsync(id);
+            var genre = await _unitOfWork.Genre.GetByIdAsync(id);
             return Ok(new NerdyResponse { Result = _mapper.Map<GenreDto>(genre) });
         }
 
         [HttpPost("")]
         public async Task<IActionResult> CreateGenre(Genre model)
         {
-            var genre = await _unitOfWork.Repository<Genre>().Create(model);
+            var genre = await _unitOfWork.Genre.Create(model);
             var result = 
             await _unitOfWork.Complete();
             return CreatedAtRoute("GenreDetails", new { id = genre.Id },genre);

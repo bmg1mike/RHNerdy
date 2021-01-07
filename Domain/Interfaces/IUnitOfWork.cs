@@ -10,7 +10,11 @@ namespace Domain.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity;
+        //IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity;
+        IBookRepository Book { get; }
+        IGenreRepository Genre { get; }
+        IPlatformRepository Platform { get; }
+        IOrderRepository Order { get; }
         Task<int> Complete();
     }
 }

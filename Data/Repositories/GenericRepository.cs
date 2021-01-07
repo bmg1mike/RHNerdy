@@ -12,20 +12,42 @@ namespace Data.Repositories
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
         private readonly NerdyContext _context;
+        
         public GenericRepository(NerdyContext context)
         {
             _context = context;
+            
         }
-        public async Task<T> GetByIdAsync(string id)
+        public async Task<T> GetByIdAsync(string id, string includeProperties = null)
         {
-            return await _context.Set<T>().FindAsync(id);
+            var query =  _context.Set<T>();
+
+            if(includeProperties != null)
+            {
+                foreach (var item in includeProperties.Split(new char[] {','},StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = (DbSet<T>)query.Include(item);
+                }
+            }
+
+            return await query.FindAsync(id);
         }
 
         
 
-        public async Task<IReadOnlyList<T>> ListAllAsync()
+        public async Task<IReadOnlyList<T>> ListAllAsync(string includeProperties = null)
         {
-            return await _context.Set<T>().ToListAsync();
+            // includeProperties should contain a comma seperated list
+
+            var query = _context.Set<T>();
+            if (includeProperties != null)
+            {
+                foreach (var item in includeProperties.Split(new char[] {','},StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = (DbSet<T>)query.Include(item);
+                }
+            }
+            return await query.ToListAsync();
         }
 
         public async Task<T> Create(T entity)
@@ -33,12 +55,5 @@ namespace Data.Repositories
             var result = await _context.Set<T>().AddAsync(entity);
             return result.Entity;
         }
-
-
-        public async Task<T> Update(string id,T entity)
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }

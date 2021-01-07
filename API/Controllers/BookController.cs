@@ -21,21 +21,21 @@ namespace API.Controllers
         [HttpGet("GetAllBooks")]
         public async Task<IActionResult> GetAllBooks()
         {
-            var books = await _unitOfWork.Repository<Book>().ListAllAsync();
+            var books = await _unitOfWork.Book.ListAllAsync();
             return Ok(new NerdyResponse { Result = books});
         }
 
         [HttpGet("GetBookById/{id}", Name ="Details")]
         public async Task<IActionResult> GetBook(string id)
         {
-            var book = await _unitOfWork.Repository<Book>().GetByIdAsync(id);
+            var book = await _unitOfWork.Book.GetByIdAsync(id);
             return Ok(new NerdyResponse {Result = book });
         }
 
         [HttpPost("AddBook")]
         public async Task<IActionResult> CreateBook(Book model)
         {
-            var book = await _unitOfWork.Repository<Book>().Create(model);
+            var book = await _unitOfWork.Book.Create(model);
             return CreatedAtRoute("Details", new { id = book.Id });
         }
 
