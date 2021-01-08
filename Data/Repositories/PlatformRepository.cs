@@ -15,5 +15,13 @@ namespace Data.Repositories
         {
             _context = context;
         }
+
+        //public async Task<OrderPlatform> UpdateOrderPlatform(string id, OrderPlatform platform)
+        //{
+        //    var orderPlatform = await _context.OrderPlatforms.FindAsync(id);
+        //    orderPlatform.Platform = platform.Platform;
+        //    orderPlatform.DateModified = platform.DateModified;
+
+        //}
     }
 }

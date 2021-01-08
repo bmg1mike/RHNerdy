@@ -16,6 +16,7 @@ namespace Data
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Dispatcher> Dispatchers { get; set; }
         public DbSet<BookImage> BookImages { get; set; }
+        public DbSet<OrderPlatform> OrderPlatforms { get; set; }
         public NerdyContext(DbContextOptions options):base(options)
         {
 
