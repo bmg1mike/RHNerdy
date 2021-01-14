@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using AutoMapper;
 using Domain.DTOs;
+using Domain.Entities;
 using Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -19,14 +20,17 @@ namespace Application
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public Task<BookDto> CreateBook(BookDto book)
+        public async Task<BookDto> CreateBook(Book model)
         {
-            throw new NotImplementedException();
+            var book = await _unitOfWork.Book.Create(model);
+            return _mapper.Map<BookDto>(book);
+            
         }
 
-        public Task<BookDto> GetBookById(string id)
+        public async Task<BookDto> GetBookById(string id)
         {
-            throw new NotImplementedException();
+            var book = await _unitOfWork.Book.GetByIdAsync(id);
+            return _mapper.Map<BookDto>(book);
         }
 
         public async Task<IReadOnlyList<BookDto>> GetBooks()
@@ -40,9 +44,27 @@ namespace Application
             return booksDto;
         }
 
-        public Task<BookDto> UpdateBook(string id, BookDto book)
+        public async Task<BookDto> UpdateBook(string id, BookDto book)
         {
-            throw new NotImplementedException();
+            var bookInDb = await _unitOfWork.Book.GetByIdAsync(id);
+            bookInDb.Amount = book.Amount;
+            bookInDb.Cover = book.Cover;
+            bookInDb.DateModified = DateTime.Now;
+            bookInDb.BookUrl = book.BookUrl;
+            bookInDb.Description = book.Description;
+            bookInDb.ISBN = book.ISBN;
+            bookInDb.Title = book.Title;
+            bookInDb.ShortDescription = book.ShortDescription;
+            
+            var save = await _unitOfWork.Complete();
+            if(save > 0)
+            {
+                return _mapper.Map<BookDto>(bookInDb);
+            }
+            else
+            {
+                throw new Exception("There was an issue saving the record to the database");
+            }
         }
     }
 }

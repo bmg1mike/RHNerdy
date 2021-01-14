@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using Application;
+using Application.Interfaces;
+using AutoMapper;
 using Data;
 using Data.Repositories;
 using Domain.Interfaces;
@@ -19,6 +21,7 @@ namespace IOC
             service.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             service.AddScoped<IUnitOfWork, UnitOfWork>();
             service.AddAutoMapper(typeof(NerdyMapper));
+            service.AddScoped<IBookService, BookService>();
         }
     }
 }

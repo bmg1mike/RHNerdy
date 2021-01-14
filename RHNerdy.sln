@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NerdyBackgroundJob", "Nerdy
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{1C503082-86A9-4FBF-A521-E79A5C5A6BBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdyUI", "NerdyUI\NerdyUI.csproj", "{E88B9943-2386-469F-92BD-BB56115D1FD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NerdyUI", "NerdyUI\NerdyUI.csproj", "{E88B9943-2386-469F-92BD-BB56115D1FD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NerdyTest", "NerdyTest\NerdyTest.csproj", "{C5ED8355-2779-4DEC-B400-B5DBA7255737}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{E88B9943-2386-469F-92BD-BB56115D1FD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E88B9943-2386-469F-92BD-BB56115D1FD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E88B9943-2386-469F-92BD-BB56115D1FD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5ED8355-2779-4DEC-B400-B5DBA7255737}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5ED8355-2779-4DEC-B400-B5DBA7255737}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5ED8355-2779-4DEC-B400-B5DBA7255737}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5ED8355-2779-4DEC-B400-B5DBA7255737}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

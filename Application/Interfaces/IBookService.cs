@@ -1,4 +1,5 @@
 ﻿using Domain.DTOs;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,6 @@ namespace Application.Interfaces
         Task<IReadOnlyList<BookDto>> GetBooks();
         Task<BookDto> GetBookById(string id);
         Task<BookDto> UpdateBook(string id, BookDto book);
-        Task<BookDto> CreateBook(BookDto book);
+        Task<BookDto> CreateBook(Book model);
     }
 }
