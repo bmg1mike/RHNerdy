@@ -13,5 +13,6 @@ namespace Domain.Interfaces.Repositories
         Task<IReadOnlyList<T>> ListAllAsync(string includeProperties = null);
         Task<T> GetByIdAsync(string id, string includeProperties = null);
         Task<T> Create(T entity);
+        Task Delete(string id);
     }
 }

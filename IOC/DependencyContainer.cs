@@ -22,6 +22,7 @@ namespace IOC
             service.AddScoped<IUnitOfWork, UnitOfWork>();
             service.AddAutoMapper(typeof(NerdyMapper));
             service.AddScoped<IBookService, BookService>();
+            service.AddScoped<IGenreService, GenreService>();
         }
     }
 }

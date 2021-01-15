@@ -66,5 +66,15 @@ namespace Application
                 throw new Exception("There was an issue saving the record to the database");
             }
         }
+        public async Task DeleteBook(string id)
+        {
+            await _unitOfWork.Genre.Delete(id);
+            var result = await _unitOfWork.Complete();
+            if (result <= 0)
+            {
+                throw new Exception("There was a problem deleting this Book from the database");
+            }
+
+        }
     }
 }

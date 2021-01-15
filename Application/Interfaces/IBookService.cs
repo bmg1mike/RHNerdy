@@ -14,5 +14,6 @@ namespace Application.Interfaces
         Task<BookDto> GetBookById(string id);
         Task<BookDto> UpdateBook(string id, BookDto book);
         Task<BookDto> CreateBook(Book model);
+        Task DeleteBook(string id);
     }
 }

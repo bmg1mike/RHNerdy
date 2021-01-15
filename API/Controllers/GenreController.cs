@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Application.Interfaces;
+using AutoMapper;
 using Domain;
 using Domain.DTOs;
 using Domain.Entities;
@@ -14,47 +15,46 @@ namespace API.Controllers
 {
     public class GenreController : BaseController
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
-        public GenreController(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly IGenreService _service;
+        public GenreController(IGenreService service)
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            _service = service;
         }
 
         [HttpGet("")]
         public async Task<IActionResult> GetAllGenre()
         {
-            var genres = await _unitOfWork.Genre.ListAllAsync();
+            var genres = await _service.GetGenres();
             return Ok(new NerdyResponse { Result = genres });
         }
 
         [HttpGet("{id}", Name ="GenreDetails")]
         public async Task<IActionResult> GetGenre(string id)
         {
-            var genre = await _unitOfWork.Genre.GetByIdAsync(id);
-            return Ok(new NerdyResponse { Result = _mapper.Map<GenreDto>(genre) });
+            var genre = await _service.GetGenreById(id);
+            return Ok(new NerdyResponse { Result = genre });
         }
 
         [HttpPost("")]
         public async Task<IActionResult> CreateGenre(Genre model)
         {
-            var genre = await _unitOfWork.Genre.Create(model);
-            var result = 
-            await _unitOfWork.Complete();
+            var genre = await _service.CreateGenre(model);
+            
             return CreatedAtRoute("GenreDetails", new { id = genre.Id },genre);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateGenre(string id, Genre model)
         {
-            throw new NotImplementedException();
+            var genre = await _service.UpdateGenre(id, model);
+            return CreatedAtRoute("GenreDetails", new { id = genre.Id }, genre);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGenre(string id)
         {
-            throw new NotImplementedException();
+            await _service.DeleteGenre(id);
+            return Ok();
         }
     }
 }

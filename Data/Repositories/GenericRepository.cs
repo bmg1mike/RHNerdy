@@ -55,5 +55,10 @@ namespace Data.Repositories
             var result = await _context.Set<T>().AddAsync(entity);
             return result.Entity;
         }
+        public async Task Delete(string id)
+        {
+            var entity = await _context.Set<T>().FindAsync(id);
+            entity.IsDeleted = true;
+        }
     }
 }

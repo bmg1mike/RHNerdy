@@ -55,7 +55,8 @@ namespace API.Controllers
         [HttpDelete("DeleteBook/{id}")]
         public async Task<IActionResult> DeleteBook(string id)
         {
-            throw new NotImplementedException();
+            await _service.DeleteBook(id);
+            return Ok();
         }
     }
 }
